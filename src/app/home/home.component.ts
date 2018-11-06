@@ -10,15 +10,9 @@ import { DataService } from '../data.service';
 export class HomeComponent implements OnInit {
   auth2: any;
   name: any;
-
-
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    const _self = this;
-    window['onSignIn'] = function (user) {
-      _self.onSignIn(user);
-    };
 
   }
 
@@ -38,18 +32,19 @@ export class HomeComponent implements OnInit {
     xhr.send('idtoken=' + email);
 
   }
-
+  getName(){
+    var auth2 = gapi.auth2.getAuthInstance();
+    var profile = auth2.currentUser.get().getBasicProfile();
+    return profile.getGivenName()
+  }
   checkInfo(googleUser) {
     var auth2 = gapi.auth2.getAuthInstance();
     if (auth2.isSignedIn.get()) {
       var profile = auth2.currentUser.get().getBasicProfile();
       this.name = profile.getName();
-      console.log('ID: ' + profile.getId());
-      console.log('Full Name: ' + profile.getName());
-      console.log('Given Name: ' + profile.getGivenName());
-      console.log('Family Name: ' + profile.getFamilyName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail());
+      document.getElementById("status").innerHTML = 'ID: ' + profile.getId()+
+      '<br>Full Name: ' + profile.getName()+'<br>Given Name: ' + profile.getGivenName()+
+      '<br>Family Name: ' + profile.getFamilyName()+    '<br>Image URL: ' + profile.getImageUrl()+'<br>Email: ' + profile.getEmail();
       
     }
     else{
