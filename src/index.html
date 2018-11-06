@@ -9,30 +9,12 @@
   <meta name="google-signin-client_id" content="376742452431-beeeejfrir8o1hr0efmdbfa2246bcmq4.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
-     
-  <script type="text/javascript">
-    window.initAuth2 = function() {
-        console.log('initAuth2');
-        gapi.load('auth2', function() {
-            gapi.auth2.init()
-                .then(function() {
-                    auth2 = gapi.auth2.getAuthInstance();
-                    console.log('isSignedIn (index.html)' + auth2.isSignedIn.get());
+  <script>
+        function init() {
+        gapi.load('auth2', function() {  });
+        }
+    </script>
 
-                    System.config({
-                        packages: {
-                            'rvep': {
-                                format: 'register',
-                                defaultExtension: 'js'
-                            }
-                        }
-                     });
-                     System.import('rvep/main')
-                        .then(null, console.error.bind(console));
-                });
-        });
-    }
-</script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">

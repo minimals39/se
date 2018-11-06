@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -12,6 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private data: DataService) { }
 
   ngOnInit() {
+    
   }
   onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
@@ -20,11 +22,12 @@ export class HomeComponent implements OnInit {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
   }
-  signOut() {
-    var auth2 = this.gapi.auth2.getAuthInstance();
+ 
+  /*signOut() {  
+
+    var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
       console.log('User signed out.');
     });
-  }
-
+  }*/
 }
