@@ -21,6 +21,8 @@
     "@angular/platform-browser": "~7.0.0-rc.0",
     "@angular/platform-browser-dynamic": "~7.0.0-rc.0",
     "@angular/router": "~7.0.0-rc.0",
+    "@types/gapi": "0.0.36",
+    "@types/gapi.auth2": "0.0.48",
     "angular-google-signin": "^0.1.5",
     "angular5-social-login": "^1.0.9",
     "core-js": "^2.5.4",
