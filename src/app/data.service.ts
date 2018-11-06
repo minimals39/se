@@ -12,10 +12,10 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
   getLocation(){
-    return this.http.get<Location>('http://ip-api.com/json/208.80.152.201')
+    return this.http.get<Location>('http://ip-api.com/json/208.80.152.201');
   }
   getUsers() {
-    return this.http.get('https://reqres.in/api/users')
+    return this.http.get('https://reqres.in/api/users');
   }
-  
+
 }

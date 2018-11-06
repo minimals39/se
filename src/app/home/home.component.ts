@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +10,11 @@ import { DataService } from '../data.service';
 export class HomeComponent implements OnInit {
   auth2: any;
   name: any;
+  users: object;
   constructor(private data: DataService) { }
 
   ngOnInit() {
-
+    this.getUsers();
   }
 
  
@@ -23,18 +24,21 @@ export class HomeComponent implements OnInit {
     if( email.indexOf('kmitl.ac.th') <= 0){
           document.getElementById("status").innerHTML = 'log in with kmitl email you idiot';
     this.signOut()    }
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://yourbackend.example.com/tokensignin');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function() {
-      console.log('Signed in as: ' + xhr.responseText);
-    };
-    xhr.send('idtoken=' + email);
+    console.log('Signed in as: ' + profile.getName());
 
+  }
+  getUsers(){
+    this.data.getUsers().subscribe(data => {
+      this.users = data
+      console.log(this.users);
+    }
+  );
   }
   getName(){
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
+    this.getUsers();
+
     return profile.getGivenName()
   }
   checkInfo(googleUser) {
@@ -45,7 +49,8 @@ export class HomeComponent implements OnInit {
       document.getElementById("status").innerHTML = 'ID: ' + profile.getId()+
       '<br>Full Name: ' + profile.getName()+'<br>Given Name: ' + profile.getGivenName()+
       '<br>Family Name: ' + profile.getFamilyName()+    '<br>Image URL: ' + profile.getImageUrl()+'<br>Email: ' + profile.getEmail();
-      
+      console.log('Signed in as: ' );
+
     }
     else{
       document.getElementById("status").innerHTML = 'not logged in';

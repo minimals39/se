@@ -11,6 +11,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { UserpageComponent } from './userpage/userpage.component';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { UserpageComponent } from './userpage/userpage.component';
     })
   ],
 
-  providers: [],
+  providers: [ DataService, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
