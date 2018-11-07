@@ -10,6 +10,9 @@ export class AboutusComponent implements OnInit {
   lat: string = '';
   lng: string = '';
   title: string = '';
+  ename: string ='';
+  info: string ='';
+  condition: string = '';
 
   location: Object;
   constructor(private map: DataService) { }
@@ -20,6 +23,9 @@ export class AboutusComponent implements OnInit {
       this.lat = data.lat;
       this.lng = data.lon;
       this.title = data.city;
+      this.ename = data.as;
+      this.info = data.isp;
+      this.condition = data.country;
     })
   }
 

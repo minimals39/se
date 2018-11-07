@@ -12,6 +12,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { UserpageComponent } from './userpage/userpage.component';
 import { DataService } from './data.service';
+import { CreateactComponent } from './createact/createact.component';
+import { MouseEvent as AGMMouseEvent } from '@agm/core';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import { DataService } from './data.service';
     AboutusComponent,
     ContactComponent,
     UserpageComponent,
+    CreateactComponent,
   ],
   imports: [
     BrowserModule,
