@@ -19,38 +19,46 @@
     </agm-info-window>
   </agm-marker>
 </agm-map>
-<h1>{{ showlat }}</h1>
-<h1>{{ showlng }}</h1>
+<h1>Location: <br>Y:{{ showlat }} <br>X:{{ showlng }} </h1>
+
 <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
 
   <h5 *ngIf="success">Your form is valid!</h5>
 
   <label>
-    Name:
-    <input type="text" formControlName="name">
-    <div *ngIf="submitted && messageForm.controls.name.errors" class="error">
-      <div *ngIf="messageForm.controls.name.errors.required">Your name is required</div>
+    EventName:
+    <input type="text" formControlName="EventName">
+    <div *ngIf="submitted && messageForm.controls.EventName.errors" class="error">
+      <div *ngIf="messageForm.controls.EventName.errors.required">Your name is required</div>
     </div>
   </label>
 
   <label>
-    Message:
-    <textarea formControlName="message"></textarea>
-    <div *ngIf="submitted && messageForm.controls.message.errors" class="error">
-      <div *ngIf="messageForm.controls.message.errors.required">A message is required</div>
+    <br>Information:
+    <textarea formControlName="Information"></textarea>
+    <div *ngIf="submitted && messageForm.controls.Information.errors" class="error">
+      <div *ngIf="messageForm.controls.Information.errors.required">An information is required</div>
     </div>
   </label>
 
-  <input type="submit" value="Send message" class="cta">
+  <label>
+    <br>participant:
+    <input type="number" formControlName="participant">
+    <div *ngIf="submitted && messageForm.controls.participant.errors" class="error">
+      <div *ngIf="messageForm.controls.participant.errors.required">A number of participant is required</div>
+    </div>
+  </label>
+
+  <input type="submit" value="SubmitEvent" class="cta">
 
 </form>
 
 <div *ngIf="submitted" class="results">
-  <strong>Name:</strong> 
-  <span>{{ messageForm.controls.name.value }}</span>
+  <strong>EventName:</strong> 
+  <span>{{ messageForm.controls.EventName.value }}</span>
 
-  <strong>Message:</strong> 
-  <span>{{ messageForm.controls.message.value }}</span>
+  <strong>Information:</strong> 
+  <span>{{ messageForm.controls.Information.value }}</span>
 </div>
 
 

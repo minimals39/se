@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';  // Import it up here
  interface Location {
-   lat: string;
-   lon: string;
-   city: string;
-   as: string;
-   country: string;
-   isp: string;
+   Lat: number;
+   Lng: number;
+   EventName: string;
+   Information: string;
+   participant: number;
  }
  
  interface userData{
@@ -21,7 +20,10 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
   getLocation(){
-    return this.http.get<Location>('http://ip-api.com/json/208.80.152.201');
+    return this.http.get<Location>('http://localhost:3000/posts');
+  }
+  getoneLocation(id){
+    return this.http.get<Location>('http://localhost:3000/posts/'+id);
   }
   getUsers() {
     return this.http.get('https://reqres.in/api/users');
@@ -42,6 +44,19 @@ export class DataService {
       );
 
   }
+  postevent(event){
+    this.http.post('http://localhost:3000/posts', event)
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
+
+  }
+
   
   getsmth() {
     return this.http.get('http://localhost:3000/posts');

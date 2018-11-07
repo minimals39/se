@@ -26,17 +26,18 @@ export class CreateactComponent implements OnInit {
 
   ngOnInit() {
     this.messageForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      message: ['', Validators.required]
+      EventName: ['', Validators.required],
+      Information: ['', Validators.required],
+      participant: ['',Validators.required],
     });
 
   }
     // google maps zoom level
-    zoom: number = 8;
+    zoom: number = 17;
 
     // initial center position for the map
-    lat: number = 51.673858;
-    lng: number = 7.815982;
+    lat: number = 13.7283785;
+    lng: number = 100.77517;
     showlat: number;
     showlng: number;
 
@@ -51,7 +52,7 @@ export class CreateactComponent implements OnInit {
         lng: $event.coords.lng,
         draggable: true
       });}
-      this.showlat = $event.coords.lat,
+      this.showlat = $event.coords.lat
       this.showlng = $event.coords.lng
     }
   
@@ -70,6 +71,18 @@ export class CreateactComponent implements OnInit {
       }
   
       this.success = true;
+      console.log(this.messageForm.controls.EventName.value);
+      console.log(this.messageForm.controls.Information.value);
+      console.log(this.messageForm.controls.participant.value);
+      console.log(this.showlat);
+      console.log(this.showlng);
+      this.data.postevent({
+        EventName: this.messageForm.controls.EventName.value,
+        Information: this.messageForm.controls.Information.value,
+        participant: this.messageForm.controls.participant.value,
+        Lat: this.showlat,
+        Lng: this.showlng
+      })
   }
   
   
