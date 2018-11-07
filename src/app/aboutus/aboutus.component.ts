@@ -7,6 +7,8 @@ interface marker {
   lng: number;
   label?: string;
   information?: string;
+  participant?: number;
+  date?: Date;
   draggable: boolean;
 }
 
@@ -21,10 +23,11 @@ export class AboutusComponent implements OnInit {
   lat: number = 13.7283785;
   lng: number = 100.77517;
   title: string = '';
-  ename: string ='';
+  parti: number;
   info: string ='';
   condition: string = '';
   location: Object;
+  date: Date;
   constructor(private map: DataService) {
    }
 
@@ -39,6 +42,8 @@ export class AboutusComponent implements OnInit {
         lng: data.Lng,
         label: data.EventName,
         information: data.Information,
+        participant: data.participant,
+        date: data.date,
         draggable: false
       })
       }
@@ -55,7 +60,9 @@ export class AboutusComponent implements OnInit {
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
     this.title = label
-    this.ename = this.markers[index].information
+    this.info = this.markers[index].information
+    this.parti = this.markers[index].participant
+    this.date = this.markers[index].date
   }
   markers: marker[] = [
 

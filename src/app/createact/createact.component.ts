@@ -29,6 +29,7 @@ export class CreateactComponent implements OnInit {
       EventName: ['', Validators.required],
       Information: ['', Validators.required],
       participant: ['',Validators.required],
+      date: ['',Validators.required],
     });
 
   }
@@ -81,7 +82,8 @@ export class CreateactComponent implements OnInit {
         Information: this.messageForm.controls.Information.value,
         participant: this.messageForm.controls.participant.value,
         Lat: this.showlat,
-        Lng: this.showlng
+        Lng: this.showlng,
+        date: this.messageForm.controls.date.value
       })
   }
   

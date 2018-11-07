@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';  // Import it up here
    EventName: string;
    Information: string;
    participant: number;
+   date: Date;
  }
  
  interface userData{

@@ -49,6 +49,15 @@
     </div>
   </label>
 
+  <label>
+    <br>Date:
+    <input type="datetime-local" formControlName="date">
+    <div *ngIf="submitted && messageForm.controls.date.errors" class="error">
+      <div *ngIf="messageForm.controls.date.errors.required">Date is required</div>
+    </div>
+  </label>
+
+
   <input type="submit" value="SubmitEvent" class="cta">
 
 </form>
