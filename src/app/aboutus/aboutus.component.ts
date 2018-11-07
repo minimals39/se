@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { MouseEvent as AGMMouseEvent } from '@agm/core';
+interface marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
+}
+
 @Component({
   selector: 'app-aboutus',
   templateUrl: './aboutus.component.html',
@@ -27,6 +35,10 @@ export class AboutusComponent implements OnInit {
       this.info = data.isp;
       this.condition = data.country;
     })
+  }
+  
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { MouseEvent as AGMMouseEvent } from '@agm/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface marker {
   lat: number;
@@ -16,10 +17,19 @@ interface marker {
 })
 
 export class CreateactComponent implements OnInit {
+  messageForm: FormGroup;
+  submitted = false;
+  success = false;
 
-  constructor(private data: DataService) { }
+
+  constructor(private data: DataService,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.messageForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      message: ['', Validators.required]
+    });
+
   }
     // google maps zoom level
     zoom: number = 8;
@@ -35,11 +45,12 @@ export class CreateactComponent implements OnInit {
     }
   
     mapClicked($event: AGMMouseEvent) {
+      if(this.markers = []){
       this.markers.push({
         lat: $event.coords.lat,
         lng: $event.coords.lng,
-        draggable: false
-      });
+        draggable: true
+      });}
       this.showlat = $event.coords.lat,
       this.showlng = $event.coords.lng
     }
@@ -49,24 +60,18 @@ export class CreateactComponent implements OnInit {
     }
   
     markers: marker[] = [
-        {
-            lat: 51.673858,
-            lng: 7.815982,
-            label: 'A',
-            draggable: true
-        },
-        {
-            lat: 51.373858,
-            lng: 7.215982,
-            label: 'B',
-            draggable: false
-        },
-        {
-            lat: 51.723858,
-            lng: 7.895982,
-            label: 'C',
-            draggable: true
-        }
+
     ]
+    onSubmit() {
+      this.submitted = true;
+  
+      if (this.messageForm.invalid) {
+          return;
+      }
+  
+      this.success = true;
+  }
+  
+  
   
 }
