@@ -35,7 +35,7 @@ export class CreateactComponent implements OnInit {
   }
     // google maps zoom level
     zoom: number = 17;
-
+    result: any;
     // initial center position for the map
     lat: number = 13.7283785;
     lng: number = 100.77517;
@@ -55,6 +55,8 @@ export class CreateactComponent implements OnInit {
       });}
       this.showlat = $event.coords.lat
       this.showlng = $event.coords.lng
+      this.result = this.data.getLocationx()
+      console.log(this.result[0])
     }
   
     markerDragEnd(m: marker, $event: MouseEvent) {

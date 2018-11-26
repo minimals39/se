@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,9 @@ import { CreateactComponent } from './createact/createact.component';
 import { MouseEvent as AGMMouseEvent } from '@agm/core';
 import { EventpageComponent } from './eventpage/eventpage.component';
 import { GrouppageComponent } from './grouppage/grouppage.component';
+import { MenuComponent } from './menu/menu.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -31,6 +35,8 @@ import { GrouppageComponent } from './grouppage/grouppage.component';
     CreateactComponent,
     EventpageComponent,
     GrouppageComponent,
+    MenuComponent,
+    MainNavComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -40,9 +46,14 @@ import { GrouppageComponent } from './grouppage/grouppage.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatIconModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAAntspVH3_QQJpWK1Y2Xe0uQ2_jKpkL9g'
-    })
+    }),
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule
   ],
 
   providers: [ DataService, ],

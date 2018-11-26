@@ -1,0 +1,38 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="'side'" [opened]="(isHandset$ | async)">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a routerLink="/"><mat-icon matListIcon>
+          account_circle
+      </mat-icon> Your account</a>
+      <a routerLink="/"><mat-icon matListIcon>
+          event_available
+      </mat-icon> Your event</a>
+      <a routerLink="/"><mat-icon matListIcon>
+          exit_to_app
+      </mat-icon>logout</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>kq</span>
+      <span class="spacer"></span>
+      <a routerLink="/"><i class="material-icons">
+          home
+        </i></a>
+      <a routerLink="/about"><i class="material-icons">
+          event
+        </i></a>
+      <a routerLink="/createact"><i class="material-icons">
+          event_note
+        </i>
+      </a>
+    </mat-toolbar>
+    <ng-content></ng-content>
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

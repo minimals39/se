@@ -8,6 +8,10 @@ import { HttpClient } from '@angular/common/http';  // Import it up here
    participant: number;
    date: Date;
  }
+ interface locaname{
+  results: string;
+
+ }
  
  interface userData{
   name: string;
@@ -23,6 +27,10 @@ export class DataService {
   getLocation(){
     return this.http.get<Location>('http://localhost:3000/posts');
   }
+  getLocationx(){
+    return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAAntspVH3_QQJpWK1Y2Xe0uQ2_jKpkL9g');
+  }
+
   getoneLocation(id){
     return this.http.get<Location>('http://localhost:3000/posts/'+id);
   }

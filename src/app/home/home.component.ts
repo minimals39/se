@@ -26,12 +26,23 @@ export class HomeComponent implements OnInit {
   }
   
   onSignIn(googleUser) {
+    var auth2 = gapi.auth2.getAuthInstance();
     var profile = googleUser.getBasicProfile();
     var email = profile.getEmail();
     if( email.indexOf('kmitl.ac.th') <= 0){
     console.log('log in with kmitl email you idiot')
     this.signOut()    }
     document.getElementById("status").innerHTML = 'Logged in';
+  }
+  checkSignin() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    var profile = auth2.currentUser.get().getBasicProfile();
+    var email = profile.getEmail();
+    if( email.indexOf('kmitl.ac.th') <= 0){
+    console.log('log in with kmitl email you idiot')
+    this.signOut()    }
+    document.getElementById("status").innerHTML = 'Logged in';
+    
   }
   getUsers(){
     this.data.getUsers().subscribe(data => {
@@ -51,9 +62,7 @@ export class HomeComponent implements OnInit {
   getName(){
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
-    
     this.getUsers();
-
     return profile.getGivenName()
   }
   post(){
