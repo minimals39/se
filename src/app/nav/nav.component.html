@@ -3,6 +3,7 @@
     <a routerLink="/" class ="logo">KMITLQUEST</a>
     <nav>
       <ul>
+        
         <li><a routerLink="/"><i class="material-icons">
             home
             </i></a></li>
@@ -16,8 +17,14 @@
         <li><a routerLink="/userpage"><i class="material-icons">
 more_vert
 </i>
+
+
           </a></li>
-            
+          <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+          </mat-menu>
       </ul>
     </nav>
   </div>

@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
     console.log('log in with kmitl email you idiot')
     this.signOut()    }
     document.getElementById("status").innerHTML = 'Logged in';
-
   }
   getUsers(){
     this.data.getUsers().subscribe(data => {

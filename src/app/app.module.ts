@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -14,6 +16,8 @@ import { UserpageComponent } from './userpage/userpage.component';
 import { DataService } from './data.service';
 import { CreateactComponent } from './createact/createact.component';
 import { MouseEvent as AGMMouseEvent } from '@agm/core';
+import { EventpageComponent } from './eventpage/eventpage.component';
+import { GrouppageComponent } from './grouppage/grouppage.component';
 
 
 @NgModule({
@@ -25,12 +29,17 @@ import { MouseEvent as AGMMouseEvent } from '@agm/core';
     ContactComponent,
     UserpageComponent,
     CreateactComponent,
+    EventpageComponent,
+    GrouppageComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
+    MatMenuModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatButtonModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAAntspVH3_QQJpWK1Y2Xe0uQ2_jKpkL9g'
     })
