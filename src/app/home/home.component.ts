@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
     console.log('log in with kmitl email you idiot')
     this.signOut()    }
     document.getElementById("status").innerHTML = 'Logged in';
-    this.auth.setLoggedIn(true);
 
     console.log(this.auth.isLoggedIn())
   }
@@ -46,7 +45,7 @@ export class HomeComponent implements OnInit {
     console.log('log in with kmitl email you idiot')
     this.signOut()    }
     document.getElementById("status").innerHTML = 'Logged in';
-    this.auth.setLoggedIn(true);
+    this.auth.setLoggedIn(true,profile.getName());
 
     console.log(this.auth.isLoggedIn);
   }

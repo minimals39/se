@@ -56,6 +56,7 @@ import { GrouppageComponent } from './grouppage/grouppage.component';
 import { MenuComponent } from './menu/menu.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -108,7 +109,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-
+    FormsModule,
     BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { DataService } from '../data.service';
 import { MouseEvent as AGMMouseEvent } from '@agm/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormsModule } from '@angular/forms'
+import { Observable, Subject } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 interface marker {
   lat: number;
@@ -9,7 +12,6 @@ interface marker {
   label?: string;
   draggable: boolean;
 }
-
 @Component({
   selector: 'app-createact',
   templateUrl: './createact.component.html',
@@ -20,6 +22,8 @@ export class CreateactComponent implements OnInit {
   messageForm: FormGroup;
   submitted = false;
   success = false;
+  options: string[] = ['เทคโนโลยี', 'ครอบครัว', 'สุขภาพ','กีฬา','การเรียนรู้','การเรียนรู้','ถ่ายภาพ','อาหาร','ภาษาและวัฒนธรรม','ดนตรี'];
+  filteredOptions: Observable<string[]>;
 
 
   constructor(private data: DataService,private formBuilder: FormBuilder) { }
@@ -30,8 +34,18 @@ export class CreateactComponent implements OnInit {
       Information: ['', Validators.required],
       participant: ['',Validators.required],
       date: ['',Validators.required],
+      category: ['',Validators.required]
     });
+    this.filteredOptions = this.messageForm.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
 
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
     // google maps zoom level
     zoom: number = 17;
@@ -85,7 +99,8 @@ export class CreateactComponent implements OnInit {
         participant: this.messageForm.controls.participant.value,
         Lat: this.showlat,
         Lng: this.showlng,
-        date: this.messageForm.controls.date.value
+        date: this.messageForm.controls.date.value,
+        category: this.messageForm.controls.category.value
       })
   }
   

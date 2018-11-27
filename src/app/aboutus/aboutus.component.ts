@@ -9,7 +9,9 @@ interface marker {
   information?: string;
   participant?: number;
   date?: Date;
+  category?: string;
   draggable: boolean;
+
 }
 
 @Component({
@@ -28,6 +30,7 @@ export class AboutusComponent implements OnInit {
   condition: string = '';
   location: Object;
   date: Date;
+  category: string = '';
   constructor(private map: DataService) {
    }
 
@@ -44,7 +47,8 @@ export class AboutusComponent implements OnInit {
         information: data.Information,
         participant: data.participant,
         date: data.date,
-        draggable: false
+        draggable: false,
+        category: data.category
       })
       }
 }
@@ -63,6 +67,7 @@ export class AboutusComponent implements OnInit {
     this.info = this.markers[index].information
     this.parti = this.markers[index].participant
     this.date = this.markers[index].date
+    this.category = this.markers[index].category
   }
   markers: marker[] = [
 

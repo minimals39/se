@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';  // Import it up here
    Information: string;
    participant: number;
    date: Date;
+   category: string;
  }
  interface locaname{
   results: string;

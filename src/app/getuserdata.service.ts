@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject,Observable }    from 'rxjs';
-
+import { HttpClient } from '@angular/common/http';  // Import it up here
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +8,7 @@ export class GetuserdataService {
   getName$: Observable<any>;
   private myMethodSubject = new Subject<any>();
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.getName$ = this.myMethodSubject.asObservable();
    }
    myMethod(data) {

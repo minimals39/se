@@ -18,11 +18,11 @@ export class UserserviceService {
   private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
   constructor(private http: HttpClient) { }
 
-  setLoggedIn(value: boolean){
+  setLoggedIn(value: boolean,name: string){
   this.loggedInStatus = value;
-  localStorage.setItem('loggedIn','true')
-
-  }
+  localStorage.setItem('loggedIn','true');
+  localStorage.setItem('name', name);
+}
   get isLoggedIn(){
     return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus)
   }
