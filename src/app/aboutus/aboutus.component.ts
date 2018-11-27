@@ -26,38 +26,59 @@ export class AboutusComponent implements OnInit {
   lng: number = 100.77517;
   title: string = '';
   parti: number;
-  info: string ='';
+  info: string = '';
   condition: string = '';
   location: Object;
   date: Date;
   category: string = '';
   constructor(private map: DataService) {
-   }
+  }
 
   ngOnInit() {
+    /*
     this.map.getLocation().subscribe(data => {
-      for(var _i = 1; _i <= Object.keys(data).length; _i++){
-      this.map.getoneLocation(_i).subscribe(
-        data =>{
-      if(data.EventName){
-      this.markers.push({
-        lat: data.Lat,
-        lng: data.Lng,
-        label: data.EventName,
-        information: data.Information,
-        participant: data.participant,
-        date: data.date,
-        draggable: false,
-        category: data.category
-      })
+      for (var _i = 1; _i <= Object.keys(data).length; _i++) {
+        this.map.getoneLocation(_i).subscribe(
+          data => {
+            if (data.EventName) {
+              this.markers.push({
+                lat: data.Lat,
+                lng: data.Lng,
+                label: data.EventName,
+                information: data.Information,
+                participant: data.participant,
+                date: data.date,
+                draggable: false,
+                category: data.category
+              })
+            }
+          }
+        )
       }
-}
-      )      }}
-      ) 
+    }
+    )*/
+    this.map.getLocation().subscribe(data => {
+      for(var _i = 0; _i <2; _i++){
+        this.map.getoneLocation(data[_i]._id).subscribe(
+          data =>{
+            console.log(data)
+            this.markers.push({
+              lat: data.lat,
+              lng: data.lng,
+              label: data.name,
+              information: data.Information,
+              participant: data.participant,
+              date: data.date,
+              draggable: false,
+              category: data.category
+            })
+        })
       }
+    })
+  }
 
 
-    
+
   markerDragEnd(m: marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
   }
