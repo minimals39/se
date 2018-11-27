@@ -4,7 +4,7 @@
 [longitude]="lng"
 [zoom]="zoom"
  [disableDefaultUI]="false"
-[zoomControl]="false"
+[zoomControl]="true"
 (mapClick)="mapClicked($event)">
   <agm-marker 
       *ngFor="let m of markers; let i = index"
@@ -57,8 +57,19 @@
     </div>
   </label>
 
-  <label>
-    <li class="genre"><mat-checkbox>one</mat-checkbox></li>
+  <label>หมวดหมู่
+    <p class="genre"><mat-checkbox>นอกบ้านและการผญภัย</mat-checkbox>
+      <mat-checkbox>เทคโนโลยี</mat-checkbox>
+      <mat-checkbox>ครอยครัว</mat-checkbox>
+      <mat-checkbox>สุขภาพ</mat-checkbox>
+      <mat-checkbox>กีฬา</mat-checkbox>
+      <mat-checkbox>การเรียนรู้</mat-checkbox>
+      <mat-checkbox>ถ่ายภาพ</mat-checkbox>
+      <mat-checkbox>อาหาร</mat-checkbox>
+      <mat-checkbox>ภาษาและวัฒนธรรม</mat-checkbox>
+      <mat-checkbox>ดนตรี</mat-checkbox>
+      <mat-checkbox>อาชีพและธุรกิจ</mat-checkbox>
+      <mat-checkbox>งานอดิเรก</mat-checkbox></p>
     </label>
 
   <input type="submit" value="SubmitEvent" class="cta">

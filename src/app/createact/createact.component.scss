@@ -48,9 +48,11 @@ label {
     }
 }
 .genre{
+    display: grid;
     mat-checkbox{
-
+        :checked{
+            background-color: orange;
+        }
 
     }
-
 }
