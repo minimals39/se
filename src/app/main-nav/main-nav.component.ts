@@ -31,8 +31,9 @@ export class MainNavComponent {
     auth2.signOut().then(function () {
       document.getElementById("status").innerHTML = 'User signed out.';
     });
-    this.auth.logout();
     location.reload();
+
+    this.auth.logout();
   }
   isLoggedIn(){
     return JSON.parse(localStorage.getItem('loggedIn'))
