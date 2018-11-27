@@ -22,9 +22,22 @@ export class UserserviceService {
   this.loggedInStatus = value;
   localStorage.setItem('loggedIn','true');
   localStorage.setItem('name', name);
+  this.userlogin(name);
 }
   get isLoggedIn(){
     return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus)
+  }
+  userlogin(name){
+    this.http.post('http://localhost:3000/posts', name)
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
+
   }
 
   logout(){
