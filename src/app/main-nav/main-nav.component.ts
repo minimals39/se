@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserserviceService } from '../userservice.service';
 
 @Component({
   selector: 'app-main-nav',
@@ -14,7 +15,7 @@ export class MainNavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private auth: UserserviceService) {}
       ngOnInit(): void {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
@@ -28,7 +29,13 @@ export class MainNavComponent {
     auth2.signOut().then(function () {
       document.getElementById("status").innerHTML = 'User signed out.';
     });
+    this.auth.logout();
+    location.reload();
   }
+  isLoggedIn(){
+    return JSON.parse(localStorage.getItem('loggedIn'))
+  }
+
 
 
 }

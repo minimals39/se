@@ -1,8 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="'side'" [opened]="(isHandset$ | async)">
+    [mode]="'side'" [opened]="!(isHandset$ | async)">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
+      <div class ="logged" *ngIf ="isLoggedIn()">
       <a routerLink ="/userpage"><button mat-button><mat-icon matListIcon>
         account_circle
     </mat-icon>Your account</button></a>
@@ -12,6 +13,7 @@
       <button mat-button (click)="signOut()"><mat-icon matListIcon>
         exit_to_app
     </mat-icon>logout</button>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -21,16 +23,17 @@
       </button>
       <span>kq</span>
       <span class="spacer"></span>
-      <a routerLink="/"><i class="material-icons">
+      <a  *ngIf = "!(isLoggedIn())"routerLink="/"><i class="material-icons">
           home
         </i></a>
-      <a routerLink="/about"><i class="material-icons">
+        <div class = "logged" *ngIf = "isLoggedIn()">      <a routerLink="/about"><i class="material-icons">
           event
         </i></a>
       <a routerLink="/createact"><i class="material-icons">
           event_note
         </i>
-      </a>
+      </a></div>
+
     </mat-toolbar>
     <ng-content></ng-content>
     <!-- Add Content Here -->

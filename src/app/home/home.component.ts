@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { UserserviceService } from '../userservice.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -10,11 +11,10 @@ export class HomeComponent implements OnInit {
   name: any;
   users: object;
   
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private auth: UserserviceService ) { }
 
   ngOnInit() {
     this.getUsers();
-
     document.getElementById("status").innerHTML = 'Please sign in with kmitl account';
   }
 
@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
     auth2.signOut().then(function () {
       document.getElementById("status").innerHTML = 'User signed out.';
     });
+    location.reload();
   }
   
   onSignIn(googleUser) {
@@ -33,6 +34,9 @@ export class HomeComponent implements OnInit {
     console.log('log in with kmitl email you idiot')
     this.signOut()    }
     document.getElementById("status").innerHTML = 'Logged in';
+    this.auth.setLoggedIn(true);
+
+    console.log(this.auth.isLoggedIn())
   }
   checkSignin() {
     var auth2 = gapi.auth2.getAuthInstance();
@@ -42,7 +46,9 @@ export class HomeComponent implements OnInit {
     console.log('log in with kmitl email you idiot')
     this.signOut()    }
     document.getElementById("status").innerHTML = 'Logged in';
-    
+    this.auth.setLoggedIn(true);
+
+    console.log(this.auth.isLoggedIn);
   }
   getUsers(){
     this.data.getUsers().subscribe(data => {
@@ -78,7 +84,7 @@ export class HomeComponent implements OnInit {
       document.getElementById("status").innerHTML = 'ID: ' + profile.getId()+
       '<br>Full Name: ' + profile.getName()+'<br>Given Name: ' + profile.getGivenName()+
       '<br>Family Name: ' + profile.getFamilyName()+    '<br>Image URL: ' + profile.getImageUrl()+'<br>Email: ' + profile.getEmail();
-
+      this.auth.logout();
     }
     else{
       document.getElementById("status").innerHTML = 'not logged in';
