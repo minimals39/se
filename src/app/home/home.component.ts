@@ -44,10 +44,11 @@ export class HomeComponent implements OnInit {
     if( email.indexOf('kmitl.ac.th') <= 0){
     console.log('log in with kmitl email you idiot')
     this.signOut()    }
-    document.getElementById("status").innerHTML = 'Logged in';
+    else{    document.getElementById("status").innerHTML = 'Logged in';
     this.auth.setLoggedIn(true,profile.getName());
 
-    console.log(this.auth.isLoggedIn);
+    console.log(this.auth.isLoggedIn);}
+
   }
   getUsers(){
     this.data.getUsers().subscribe(data => {

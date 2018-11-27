@@ -39,11 +39,11 @@ export class EventpageComponent implements OnInit {
       for(var _i = 1; _i <= Object.keys(data).length; _i++){
       this.map.getoneLocation(_i).subscribe(
         data =>{
-      if(data.EventName){
+      if(data.name){
       this.markers.push({
-        lat: data.Lat,
-        lng: data.Lng,
-        label: data.EventName,
+        lat: data.lat,
+        lng: data.lng,
+        label: data.name,
         information: data.Information,
         participant: data.participant,
         date: data.date,
