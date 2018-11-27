@@ -17,11 +17,13 @@ export class MainNavComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, private auth: UserserviceService) {}
       ngOnInit(): void {
+        var auth2 = gapi.auth2.getAuthInstance();
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
-        var el = document.getElementById("out");
-        el.addEventListener("click", this.signOut, false);
-      
+        if(!auth2){
+          this.auth.logout();
+
+        }
       
       }
   signOut() {  
