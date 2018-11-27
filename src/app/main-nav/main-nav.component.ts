@@ -9,12 +9,26 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./main-nav.component.scss'],
 })
 export class MainNavComponent {
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
   constructor(private breakpointObserver: BreakpointObserver) {}
+      ngOnInit(): void {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        var el = document.getElementById("out");
+        el.addEventListener("click", this.signOut, false);
+      
+      
+      }
+  signOut() {  
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      document.getElementById("status").innerHTML = 'User signed out.';
+    });
+  }
+
 
 }

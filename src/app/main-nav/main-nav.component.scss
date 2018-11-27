@@ -8,12 +8,27 @@
   box-shadow: 3px 0 6px lightblue;
   text-align: center;
   a{
+    button{
+    flex: 1 1 auto;
     display: grid;
     text-decoration: none;
     .mat-icon{
       align-items: center;
     }
+
+    }
+
   }
+  button{
+    flex: 1 1 auto;
+    display: grid;
+    text-decoration: none;
+    .mat-icon{
+      align-items: center;
+    }
+
+    }
+  
 
 }
 .mat-toolbar{

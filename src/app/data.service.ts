@@ -65,7 +65,10 @@ export class DataService {
       );
 
   }
+  setLoggedin(){
 
+
+  }
   
   getsmth() {
     return this.http.get('http://localhost:3000/posts');

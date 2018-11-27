@@ -55,8 +55,8 @@ export class CreateactComponent implements OnInit {
       });}
       this.showlat = $event.coords.lat
       this.showlng = $event.coords.lng
-      this.result = this.data.getLocationx()
-      console.log(this.result[0])
+      
+      console.log(this.data.getLocationx())
     }
   
     markerDragEnd(m: marker, $event: MouseEvent) {
