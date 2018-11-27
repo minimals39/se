@@ -1,3 +1,38 @@
-<p>
-  eventpage works!
-</p>
+<H1>USER EVENT</H1>
+<h1>{{ title }}</h1>
+
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<agm-map
+[latitude]="lat"
+[longitude]="lng"
+[zoom]="zoom"
+ [disableDefaultUI]="false"
+[zoomControl]="false"
+>
+  <agm-marker 
+      *ngFor="let m of markers; let i = index"
+      (markerClick)="clickedMarker(m.label, i)"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [label]="m.label">
+    <agm-info-window>
+      <strong>{{ m.label }}</strong>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
+<!--<div *ngIf="event"  id ="eventlist">
+<li **ngFor="let event of events">
+  
+</li>
+</div>-->
+<div id="information">
+<p><strong>Activity Name: </strong>{{ title }}</p>
+<p><strong>Information: </strong>{{ info }}</p>
+<p><strong>Number of participant: </strong>{{ parti }}</p>
+<p><strong>Category: </strong>{{ category }}</p>
+<p><strong>Date : </strong>{{ date }}</p>
+<button mat-button>Cancel Event</button>
+
+</div>
