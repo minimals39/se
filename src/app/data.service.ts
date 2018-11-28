@@ -14,9 +14,6 @@ import { takeWhile } from 'rxjs/operators';
    date: Date;
    category: string;
    createrID: string;
-   _id:string;
-   aaa:number;
-   bbb:number;
  } 
  interface locaname{
   results: string;
