@@ -35,7 +35,7 @@ export class UserpageComponent implements OnInit {
     //get name 
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
-    return profile.getGivenName()
+    return profile.getName()
   }
   edit(){
     //enable editing
@@ -48,12 +48,20 @@ export class UserpageComponent implements OnInit {
 
   }
   disedit() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    var profile = auth2.currentUser.get().getBasicProfile();
       //enable editing
       this.messageForm.controls.Name.disable();
       this.messageForm.controls.Year.disable();
       this.messageForm.controls.Department.disable();
       this.messageForm.controls.Faculty.disable();
       this.messageForm.controls.Group.disable();
+      this.data.postUser({
+        Name: profile.getName(),
+        Year: this.messageForm.controls.Year.value,
+        Department: this.messageForm.controls.Department.value,
+        Faculty: this.messageForm.controls.Faculty.value,
+      })
 
   }
 
@@ -61,21 +69,17 @@ export class UserpageComponent implements OnInit {
 
     this.submitted = true;
 
-    if (this.messageForm.invalid) {
-        return;
-    }
-
+    // if (this.messageForm.invalid) {
+    //     return;
+    // }
     this.success = true;
+
     //do the edit code here
-    console.log(this.messageForm.controls.Name.value);
-    console.log(this.messageForm.controls.Year.value);
-    console.log(this.messageForm.controls.Faculty.value);
-    this.data.postevent({
-      Name: this.messageForm.controls.Name.value,
+    this.data.postUser({
+      Name: this.messageForm.controls.Year.value,
       Year: this.messageForm.controls.Year.value,
       Department: this.messageForm.controls.Department.value,
       Faculty: this.messageForm.controls.Faculty.value,
-      Group: this.messageForm.controls.Group.value
     })
 }
 

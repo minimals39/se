@@ -21,9 +21,10 @@ import { takeWhile } from 'rxjs/operators';
  }
  
  interface userData{
-  name: string;
-  department: string;
-  group: Object;
+  Name: String;
+  Year: number;
+  Department: String;
+  Faculty: String;
  }
 @Injectable({
   providedIn: 'root'
@@ -124,6 +125,20 @@ export class DataService {
         // console.log("res.jwtToken")
         // localStorage.setItem()
       })
+  }
+  postUser(event){
+    this.http.post('http://localhost:3000/users/updateUser', event)
+      .subscribe(
+        res => {
+          console.log(event)
+          console.log("res");
+        },
+        err => {
+
+          console.log("Error occured",err);
+        }
+      );
+
   }
   getsmth() {
     return this.http.get('http://localhost:3000/map/get');
