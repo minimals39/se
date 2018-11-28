@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';  // Import it up here
+import { takeWhile } from 'rxjs/operators';
  interface Location {
+   _id:string;
    Lat: number;
    Lng: number;
    EventName: string;
@@ -32,9 +34,6 @@ export class DataService {
   getLocation(){
     return this.http.get<Location>('http://localhost:3000/map/get');
   }
-  getLocationx(){
-    return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyAAntspVH3_QQJpWK1Y2Xe0uQ2_jKpkL9g');
-  }
 
   getoneLocation(id){
     return this.http.get<Location>('http://localhost:3000/map/getOne/'+id);
@@ -62,10 +61,11 @@ export class DataService {
     this.http.post('http://localhost:3000/map/posts', event)
       .subscribe(
         res => {
-          console.log(res);
+          console.log("res");
         },
         err => {
-          console.log("Error occured");
+
+          console.log("Error occured",err);
         }
       );
 
@@ -85,7 +85,33 @@ export class DataService {
 
   }
   
-  
+  participate(event){
+    console.log("asdfgn ",event)
+
+    return this.http.post('http://localhost:3000/users/joinNewActivity',event)
+    .subscribe(
+      res =>{
+        console.log(res)
+      },err=>{
+        console.log(err)
+      }
+    )
+  }
+
+  createUser(event){
+    console.log("create user : ", event)
+    localStorage.setItem('userID',event.userID)
+    return this.http.post('http://localhost:3000/users/login',event)
+    .subscribe(
+      err=>{
+        console.log(err)
+      }, 
+      res=>{
+
+        // console.log("res.jwtToken")
+        // localStorage.setItem()
+      })
+  }
   getsmth() {
     return this.http.get('http://localhost:3000/map/get');
   }

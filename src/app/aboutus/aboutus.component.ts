@@ -40,41 +40,19 @@ export class AboutusComponent implements OnInit {
   location: Object;
   date: Date;
   category: string = '';
+  _id:string;
   constructor(private map: DataService, private formBuilder: FormBuilder, private data: DataService) {
   }
 
   ngOnInit() {
-
-    /*this.map.getLocation().subscribe(data => {
-      for (var _i = 1; _i <= Object.keys(data).length; _i++) {
-        this.map.getoneLocation(_i).subscribe(
-          data => {
-            if (data.EventName) {
-              this.markers.push({
-                lat: data.Lat,
-                lng: data.Lng,
-                title: data.EventName,
-                information: data.Information,
-                participant: data.participant,
-                date: data.date,
-                draggable: false,
-                category: data.category,
-                visible: true,
-              })
-            }
-          }
-        )
-      }
-    }
-    )*/
-    console.log(this.markers.values.toString()
-    );
-    
     this.map.getLocation().subscribe(data => {
       for (var _i = 0; _i < Object.keys(data).length; _i++) {
         this.map.getoneLocation(data[_i]._id).subscribe(
           data => {
             if (data.EventName) {
+              this._id=data._id
+              this.lat = data.Lat
+              this.lng = data.Lng
               this.markers.push({
                 lat: data.Lat,
                 lng: data.Lng,
@@ -89,7 +67,6 @@ export class AboutusComponent implements OnInit {
           }
         )
       }
-  
     }
     )
     this.messageForm = this.formBuilder.group({
@@ -129,8 +106,12 @@ export class AboutusComponent implements OnInit {
 
   }
   participate() {
-    // do something
-
+    console.log(this._id, this.lat, this.lng)
+    this.map.participate(
+      {
+        _id:this._id,
+        userID: localStorage.getItem('userID')
+      })
   }
 
   markerDragEnd(m: marker, $event: MouseEvent) {
