@@ -127,21 +127,11 @@ export class EventpageComponent implements OnInit {
      this.setedit = true;
   }
   cancel() {
-   /* this.submitted = true;
       var auth2 = gapi.auth2.getAuthInstance();
       var profile = auth2.currentUser.get().getBasicProfile();
-      if (this.messageForm.invalid) {
-          return;
-      }
-      this.success = true;
-      console.log(this.messageForm.controls.EventName.value);
-      console.log(this.messageForm.controls.Information.value);
-      console.log(this.messageForm.controls.participant.value);
-      //console.log(this.showlat);
-      //console.log(this.showlng);*/
       this.data.delevent({
-       EventName:"two",
-       createrID:"111349961209417576042"
+       EventName:this.title,
+       createrID:profile.getId()
       })
 
   }
