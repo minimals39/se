@@ -10,29 +10,30 @@ export class HomeComponent implements OnInit {
   auth2: any;
   name: any;
   users: object;
-  
-  constructor(private data: DataService, private auth: UserserviceService ) { }
+
+  constructor(private data: DataService, private auth: UserserviceService) { }
 
   ngOnInit() {
     this.getUsers();
     document.getElementById("status").innerHTML = 'Please sign in with kmitl account';
   }
 
-  signOut() {  
+  signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
       document.getElementById("status").innerHTML = 'User signed out.';
     });
     location.reload();
   }
-  
+
   onSignIn(googleUser) {
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = googleUser.getBasicProfile();
     var email = profile.getEmail();
-    if( email.indexOf('kmitl.ac.th') <= 0){
-    console.log('log in with kmitl email you idiot')
-    this.signOut()    }
+    if (email.indexOf('kmitl.ac.th') <= 0) {
+      console.log('log in with kmitl email you idiot')
+      this.signOut()
+    }
     document.getElementById("status").innerHTML = 'Logged in';
 
     console.log(this.auth.isLoggedIn())
@@ -40,69 +41,80 @@ export class HomeComponent implements OnInit {
   checkSignin() {
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
-    var email = profile.getEmail();
-    if( email.indexOf('kmitl.ac.th') <= 0){
-    console.log('log in with kmitl email you idiot')
-    this.signOut()    }
-    else{    document.getElementById("status").innerHTML = 'Logged in';
-    this.auth.setLoggedIn(true,profile.getName());
 
-    console.log(this.auth.isLoggedIn);}
+    if (profile) {
+      var email = profile.getEmail();
+      if (email.indexOf('kmitl.ac.th') <= 0) {
+        console.log('log in with kmitl email you idiot')
+        this.signOut()
+      }
+      else {
+        document.getElementById("status").innerHTML = 'Logged in';
+        this.auth.setLoggedIn(true, profile.getName());
+
+        console.log(this.auth.isLoggedIn);
+      }
+
+    }
+
+    else {
+      document.getElementById("status").innerHTML = 'Please sign in with google authentication above';
+    }
 
   }
-  getUsers(){
+  getUsers() {
     this.data.getUsers().subscribe(data => {
       this.users = data
       console.log(this.users);
     }
-  );
+    );
   }
-  getsmth(){
+  getsmth() {
     this.data.getsmth().subscribe(data => {
       this.users = data
       console.log(this.users);
     }
-  );
+    );
 
   }
-  getName(){
+  getName() {
     var auth2 = gapi.auth2.getAuthInstance();
     var profile = auth2.currentUser.get().getBasicProfile();
     this.getUsers();
     return profile.getGivenName()
   }
-  post(){
+  post() {
     return this.data.postsmth();
 
   }
-  
+
   checkInfo(googleUser) {
     var auth2 = gapi.auth2.getAuthInstance();
     if (auth2.isSignedIn.get()) {
       var profile = auth2.currentUser.get().getBasicProfile();
       this.name = profile.getName();
-      document.getElementById("status").innerHTML = 'ID: ' + profile.getId()+
-      '<br>Full Name: ' + profile.getName()+'<br>Given Name: ' + profile.getGivenName()+
-      '<br>Family Name: ' + profile.getFamilyName()+    '<br>Image URL: ' + profile.getImageUrl()+'<br>Email: ' + profile.getEmail();
+      document.getElementById("status").innerHTML = 'ID: ' + profile.getId() +
+        '<br>Full Name: ' + profile.getName() + '<br>Given Name: ' + profile.getGivenName() +
+        '<br>Family Name: ' + profile.getFamilyName() + '<br>Image URL: ' + profile.getImageUrl() + '<br>Email: ' + profile.getEmail();
       this.auth.logout();
     }
-    else{
+    else {
       document.getElementById("status").innerHTML = 'not logged in';
     }
 
-      }
+  }
   checkName(googleUser) {
     var auth2 = gapi.auth2.getAuthInstance();
     if (auth2.isSignedIn.get()) {
       var profile = auth2.currentUser.get().getBasicProfile();
       this.name = profile.getName();
-        document.getElementById("status").innerHTML = 'Name: ' +this.name;
-    
-          }
-    else{
+      document.getElementById("status").innerHTML = 'Name: ' + this.name;
+
+    }
+    else {
       document.getElementById("status").innerHTML = 'not logged in';
     }
-      }
+  }
 
-  
+
 }

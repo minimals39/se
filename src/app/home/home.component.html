@@ -1,12 +1,6 @@
 <div class="main">
 <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" ></div>
 
-<button class ="button"(click)="checkSignin()">confirmlogin</button>
-<button class ="button"(click)="checkInfo()">getinfo</button>
-<button class ="button"(click)="checkName()">check name</button>
-<button class ="button"(click)="post()">trypost</button>
-<button class ="button"(click)="getsmth()">tryget</button>
-
-
+<button class ="button"(click)="checkSignin()" [disabled] = "auth2">confirmlogin</button>
 <div id="status"></div>
 </div>
