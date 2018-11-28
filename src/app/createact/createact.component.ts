@@ -32,7 +32,7 @@ export class CreateactComponent implements OnInit {
     this.messageForm = this.formBuilder.group({
       EventName: ['', Validators.required],
       Information: ['', Validators.required],
-      participant: ['',Validators.required],
+      participant: ['',[Validators.required,Validators.min(1)]],
       date: ['',Validators.required],
       category: ['',Validators.required]
     });

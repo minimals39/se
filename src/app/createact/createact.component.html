@@ -46,6 +46,8 @@
     <input type="number" formControlName="participant">
     <div *ngIf="submitted && messageForm.controls.participant.errors" class="error">
       <div *ngIf="messageForm.controls.participant.errors.required">A number of participant is required</div>
+      <div *ngIf="messageForm.controls.participant.errors.min">A number of participant cannot be 0 or less</div>
+
     </div>
   </label>
 
