@@ -81,7 +81,8 @@ export class CreateactComponent implements OnInit {
     ]
     onSubmit() {
       this.submitted = true;
-  
+      var auth2 = gapi.auth2.getAuthInstance();
+      var profile = auth2.currentUser.get().getBasicProfile();
       if (this.messageForm.invalid) {
           return;
       }
@@ -99,7 +100,8 @@ export class CreateactComponent implements OnInit {
         Lat: this.showlat,
         Lng: this.showlng,
         date: this.messageForm.controls.date.value,
-        category: this.messageForm.controls.category.value
+        category: this.messageForm.controls.category.value,
+        createrID: profile.getId()
       })
   }
   

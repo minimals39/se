@@ -45,7 +45,7 @@ export class AboutusComponent implements OnInit {
 
   ngOnInit() {
 
-    this.map.getLocation().subscribe(data => {
+    /*this.map.getLocation().subscribe(data => {
       for (var _i = 1; _i <= Object.keys(data).length; _i++) {
         this.map.getoneLocation(_i).subscribe(
           data => {
@@ -53,7 +53,7 @@ export class AboutusComponent implements OnInit {
               this.markers.push({
                 lat: data.Lat,
                 lng: data.Lng,
-                label: data.EventName,
+                title: data.EventName,
                 information: data.Information,
                 participant: data.participant,
                 date: data.date,
@@ -66,28 +66,32 @@ export class AboutusComponent implements OnInit {
         )
       }
     }
-    )
+    )*/
     console.log(this.markers.values.toString()
     );
-    /*
+    
     this.map.getLocation().subscribe(data => {
-      for (var _i = 0; _i < 2; _i++) {
+      for (var _i = 0; _i < Object.keys(data).length; _i++) {
         this.map.getoneLocation(data[_i]._id).subscribe(
           data => {
-            console.log(data)
-            this.markers.push({
-              lat: data.lat,
-              lng: data.lng,
-              label: data.name,
-              information: data.Information,
-              participant: data.participant,
-              date: data.date,
-              draggable: false,
-              category: data.category
-            })
-          })
+            if (data.EventName) {
+              this.markers.push({
+                lat: data.Lat,
+                lng: data.Lng,
+                label: data.EventName,
+                information: data.Information,
+                participant: data.participant,
+                date: data.date,
+                draggable: false,
+                category: data.category
+              })
+            }
+          }
+        )
       }
-    });*/
+  
+    }
+    )
     this.messageForm = this.formBuilder.group({
       category: ''
     });
@@ -106,7 +110,7 @@ export class AboutusComponent implements OnInit {
     console.log(this.messageForm.controls.category.value);
     var checker = this.messageForm.controls.category.value;
     if (checker != "") {
-      for (var _i = 1; _i <= Object.keys(this.markers).length; _i++) {
+      for (var _i = 0; _i <= Object.keys(this.markers).length; _i++) {
         this.markers[_i].visible = false;
         if(this.markers[_i].category && this.markers[_i].category.includes(checker)){
         console.log(this.markers[_i].category);
@@ -115,7 +119,7 @@ export class AboutusComponent implements OnInit {
 
       }
     }else{
-      for (var _i = 1; _i <= Object.keys(this.markers).length; _i++) {
+      for (var _i = 0; _i <= Object.keys(this.markers).length; _i++) {
         this.markers[_i].visible = true;
  
       }

@@ -47,8 +47,8 @@ export class EventpageComponent implements OnInit {
 
   ngOnInit() {
     this.map.getLocation().subscribe(data => {
-      for (var _i = 1; _i <= Object.keys(data).length; _i++) {
-        this.map.getoneLocation(_i).subscribe(
+      for (var _i = 0; _i < Object.keys(data).length; _i++) {
+        this.map.getoneLocation(data[_i]._id).subscribe(
           data => {
             if (data.EventName) {
               this.markers.push({
