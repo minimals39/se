@@ -3,6 +3,8 @@ import { DataService } from '../data.service';
 import { MouseEvent as AGMMouseEvent, MarkerManager } from '@agm/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { FormsModule } from '@angular/forms'
+import { Observable, Subject } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 interface marker {
   lat: number;
@@ -26,6 +28,8 @@ export class EventpageComponent implements OnInit {
   submitted = false;
   success = false;
   setedit = false;
+  options: string[] = ['เทคโนโลยี', 'ครอบครัว', 'สุขภาพ','กีฬา','การเรียนรู้','การเรียนรู้','ถ่ายภาพ','อาหาร','ภาษาและวัฒนธรรม','ดนตรี'];
+  filteredOptions: Observable<string[]>;
 
   zoom: number = 17;
   // initial center position for the map
@@ -61,6 +65,7 @@ export class EventpageComponent implements OnInit {
           }
         )
       }
+  
     }
     )
     this.messageForm = this.formBuilder.group({
@@ -70,9 +75,18 @@ export class EventpageComponent implements OnInit {
       date: ['', Validators.required],
       category: ['', Validators.required]
     });
+    this.filteredOptions = this.messageForm.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+
   }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
 
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
 
   markerDragEnd(m: marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);

@@ -44,7 +44,6 @@ export class CreateactComponent implements OnInit {
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
     // google maps zoom level

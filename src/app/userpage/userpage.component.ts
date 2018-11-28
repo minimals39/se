@@ -10,10 +10,14 @@ import { DataService } from '../data.service';
 })
 export class UserpageComponent implements OnInit {
   username: string;
+  year: number;
+  department: string;
+  faculty: string;
+  group: string;
   messageForm: FormGroup;
   submitted = false;
   success = false;
-  setedit = true;
+  setedit = false;
   constructor(private data: DataService,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -35,6 +39,7 @@ export class UserpageComponent implements OnInit {
   }
   edit(){
     //enable editing
+    this.setedit = true;
     this.messageForm.controls.Name.enable();
     this.messageForm.controls.Year.enable();
     this.messageForm.controls.Department.enable();

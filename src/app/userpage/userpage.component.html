@@ -24,7 +24,7 @@
 
   <label>
     <br>Department:
-    <input type="text" formControlName="Department">
+    <input type="text" formControlName="Department" value = {{department}}>
     <div *ngIf="submitted && messageForm.controls.Department.errors" class="error">
       <div *ngIf="messageForm.controls.Department.errors.required">Department is required</div>
     </div>
@@ -32,22 +32,20 @@
 
   <label>
     <br>Faculty:
-    <input type="text" formControlName="Faculty">
+    <input type="text" formControlName="Faculty" value = {{faculty}}>
     <div *ngIf="submitted && messageForm.controls.Faculty.errors" class="error">
       <div *ngIf="messageForm.controls.Faculty.errors.required">Faculty is required</div>
     </div>
   </label>
   
   <label>Club: 
-      <input type="text" formControlName="Group">
+      <input type="text" formControlName="Group" value = {{group}}>
       <div *ngIf="submitted && messageForm.controls.Group.errors" class="error">
         <div *ngIf="messageForm.controls.Group.errors.required">Club is required</div>
 
       </div>
     </label>
+  <input type="submit" value="SubmitEvent" class="cta" *ngIf = "setedit">
 </form>
 
-
-
-  <input type="submit" value="SubmitEvent" class="cta">
 </div>

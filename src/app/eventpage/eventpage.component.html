@@ -44,7 +44,7 @@
   
     <label>
       ActivityName:
-      <input type="text" formControlName="EventName">
+      <input type="text" formControlName="EventName" value = {{title}}>
       <div *ngIf="submitted && messageForm.controls.EventName.errors" class="error">
         <div *ngIf="messageForm.controls.EventName.errors.required">Activity Name is required</div>
       </div>
@@ -52,7 +52,7 @@
   
     <label>
       <br>Information:
-      <textarea formControlName="Information"></textarea>
+      <textarea formControlName="Information" value = {{info}}></textarea>
       <div *ngIf="submitted && messageForm.controls.Information.errors" class="error">
         <div *ngIf="messageForm.controls.Information.errors.required">An information is required</div>
       </div>
@@ -60,7 +60,7 @@
   
     <label>
       <br>participant:
-      <input type="number" formControlName="participant">
+      <input type="number" formControlName="participant" value = {{parti}}>
       <div *ngIf="submitted && messageForm.controls.participant.errors" class="error">
         <div *ngIf="messageForm.controls.participant.errors.required">A number of participant is required</div>
       </div>
@@ -68,7 +68,7 @@
   
     <label>
       <br>Date:
-      <input type="datetime-local" formControlName="date">
+      <input type="datetime-local" formControlName="date" value = {{date}}>
       <div *ngIf="submitted && messageForm.controls.date.errors" class="error">
         <div *ngIf="messageForm.controls.date.errors.required">Date is required</div>
       </div>
@@ -76,7 +76,7 @@
     
     <label>Category
         <input type="text" placeholder="Pick one" aria-label="category" matInput [matAutocomplete]="auto" formControlName="category">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             {{option}}
           </mat-option>
