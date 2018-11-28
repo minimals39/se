@@ -72,6 +72,10 @@ export class EventpageComponent implements OnInit {
   markers: marker[] = [
 
   ]
+  cancel(){
+    return
+
+  }
 
 
 }

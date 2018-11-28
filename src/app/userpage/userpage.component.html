@@ -1,7 +1,53 @@
+<button mat-button (click)="edit()">edit</button>
+<div class = "form">
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
 
-<div id ="Profile"><p>name: {{ username }}</p>
-<p>Year: </p>
-<p>Department: </p>
-<p>faculty: </p>
-<p>Club: </p>
-<button mat-button>edit</button></div>
+  <h5 *ngIf="success">Your form is valid!</h5>
+
+  <label>
+    Name:
+    <input type="text" formControlName="Name" value = {{username}} >
+    <div *ngIf="submitted && messageForm.controls.Name.errors" class="error">
+      <div *ngIf="messageForm.controls.Name.errors.required">Your name is required</div>
+    </div>
+  </label>
+
+  <label>
+    <br>Year:
+    <input type = "number" formControlName="Year" value = {{year}} min="1" max="4">
+    <div *ngIf="submitted && messageForm.controls.Year.errors" class="error">
+      <div *ngIf="messageForm.controls.Year.errors.required">Year is required</div>
+      <div *ngIf="messageForm.controls.Year.errors.max">Please enter 1-4</div>
+
+    </div>
+  </label>
+
+  <label>
+    <br>Department:
+    <input type="text" formControlName="Department">
+    <div *ngIf="submitted && messageForm.controls.Department.errors" class="error">
+      <div *ngIf="messageForm.controls.Department.errors.required">Department is required</div>
+    </div>
+  </label>
+
+  <label>
+    <br>Faculty:
+    <input type="text" formControlName="Faculty">
+    <div *ngIf="submitted && messageForm.controls.Faculty.errors" class="error">
+      <div *ngIf="messageForm.controls.Faculty.errors.required">Faculty is required</div>
+    </div>
+  </label>
+  
+  <label>Club: 
+      <input type="text" formControlName="Group">
+      <div *ngIf="submitted && messageForm.controls.Group.errors" class="error">
+        <div *ngIf="messageForm.controls.Group.errors.required">Club is required</div>
+
+      </div>
+    </label>
+</form>
+
+
+
+  <input type="submit" value="SubmitEvent" class="cta">
+</div>
