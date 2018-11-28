@@ -46,7 +46,16 @@ export class UserpageComponent implements OnInit {
     this.messageForm.controls.Faculty.enable();
     this.messageForm.controls.Group.enable();
 
-}
+  }
+  disedit() {
+      //enable editing
+      this.messageForm.controls.Name.disable();
+      this.messageForm.controls.Year.disable();
+      this.messageForm.controls.Department.disable();
+      this.messageForm.controls.Faculty.disable();
+      this.messageForm.controls.Group.disable();
+
+  }
 
   onSubmit() {
 

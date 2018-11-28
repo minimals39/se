@@ -1,51 +1,66 @@
-<div class = "form">
-<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+<script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+<script src="//code.angularjs.org/snapshot/angular-animate.js"></script>
+<script src="script.js"></script>
+<button mat-button (click)="edit()">edit</button>
+<div class="form">
+  <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
 
-  <h5 *ngIf="success">Your form is valid!</h5>
+    <h5 *ngIf="success">Your form is valid!</h5>
 
-  <label>
-    Name:
-    <input type="text" formControlName="Name" value = {{username}} >
-    <div *ngIf="submitted && messageForm.controls.Name.errors" class="error">
-      <div *ngIf="messageForm.controls.Name.errors.required">Your name is required</div>
-    </div>
-  </label>
+    <label>
+      Name:
+      <input type="text" formControlName="Name" value={{username}}>
+      <div *ngIf="submitted && messageForm.controls.Name.errors" class="error">
+        <div *ngIf="messageForm.controls.Name.errors.required">Your name is required</div>
+      </div>
+    </label>
 
-  <label>
-    <br>Year:
-    <input type = "number" formControlName="Year" value = {{year}} min="1" max="4">
-    <div *ngIf="submitted && messageForm.controls.Year.errors" class="error">
-      <div *ngIf="messageForm.controls.Year.errors.required">Year is required</div>
-      <div *ngIf="messageForm.controls.Year.errors.max">Please enter 1-4</div>
-
-    </div>
-  </label>
-
-  <label>
-    <br>Department:
-    <input type="text" formControlName="Department" value = {{department}}>
-    <div *ngIf="submitted && messageForm.controls.Department.errors" class="error">
-      <div *ngIf="messageForm.controls.Department.errors.required">Department is required</div>
-    </div>
-  </label>
-
-  <label>
-    <br>Faculty:
-    <input type="text" formControlName="Faculty" value = {{faculty}}>
-    <div *ngIf="submitted && messageForm.controls.Faculty.errors" class="error">
-      <div *ngIf="messageForm.controls.Faculty.errors.required">Faculty is required</div>
-    </div>
-  </label>
-  
-  <label>Club: 
-      <input type="text" formControlName="Group" value = {{group}}>
-      <div *ngIf="submitted && messageForm.controls.Group.errors" class="error">
-        <div *ngIf="messageForm.controls.Group.errors.required">Club is required</div>
+    <label>
+      <br>Year:
+      <input type="number" formControlName="Year" value={{year}} min="1" max="4">
+      <div *ngIf="submitted && messageForm.controls.Year.errors" class="error">
+        <div *ngIf="messageForm.controls.Year.errors.required">Year is required</div>
+        <div *ngIf="messageForm.controls.Year.errors.max">Please enter 1-4</div>
 
       </div>
     </label>
-  <input type="submit" value="SubmitEvent" class="cta" *ngIf = "setedit">
-</form>
 
+    <label>
+      <br>Faculty:<br />
+      <select aria-label="Department" formControlName="Faculty">
+        <option id="greet" ng-selected="Department">วิศวะกรรมศาสตร์</option>
+        <option id="greet" ng-selected="Department">วิทยาศาสตร์</option>
+        <option id="greet" ng-selected="Department">สถาปัตยกรรมศาสตร์</option>
+        <option id="greet" ng-selected="Department">บริหาร</option>
+        <option id="greet" ng-selected="Department">ครุศาสตร์อุตสาหกรรม</option>
+        <option id="greet" ng-selected="Department">อุตสาหกรรมเกษตร</option>
+        <option id="greet" ng-selected="Department">เกษตร</option>
+        <option id="greet" ng-selected="Department">ศิลปศาสตร์</option>
+        <option id="greet" ng-selected="Department">วัสดุนาโน</option>
+        <option id="greet" ng-selected="Department">วิศวกรรมการผลิตขั้นสูง</option>
+        <option id="greet" ng-selected="Department">วิศวกรรมซอร์ฟแวร์</option>
+      </select>
+      <div *ngIf="submitted && messageForm.controls.Department.errors" class="error">
+        <div *ngIf="messageForm.controls.Department.errors.required">Department is required</div>
+      </div>
+    </label>
+    <label>
+      <br>Department:<br />
+      <select aria-label="ngSelected demo" formControlName="Department">
+        <option id="greet" ng-selected="Faculty">--</option>
+        <option id="greet" ng-selected="Faculty">คอมพิวเตอร์</option>
+        <option id="greet" ng-selected="Faculty">ไฟฟ้า</option>
+        <option id="greet" ng-selected="Faculty">โทรคมนาคม</option>
+        <option id="greet" ng-selected="Faculty">อุตสาหกรรม</option>
+        <option id="greet" ng-selected="Faculty">เคมี</option>
+        <option id="greet" ng-selected="Faculty">โยธา</option>
+      </select>
+      <div *ngIf="submitted && messageForm.controls.Faculty.errors" class="error">
+        <div *ngIf="messageForm.controls.Faculty.errors.required">Faculty is required</div>
+      </div>
+    </label>
+    <br />
+  </form>
+  <input (click)="disedit()" type="submit" value="SubmitEvent" class="cta">
 </div>
-<button mat-button (click)="edit()">edit</button>
+
