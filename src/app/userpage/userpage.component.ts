@@ -44,6 +44,7 @@ export class UserpageComponent implements OnInit {
 }
 
   onSubmit() {
+
     this.submitted = true;
 
     if (this.messageForm.invalid) {
@@ -51,6 +52,7 @@ export class UserpageComponent implements OnInit {
     }
 
     this.success = true;
+    //do the edit code here
     console.log(this.messageForm.controls.Name.value);
     console.log(this.messageForm.controls.Year.value);
     console.log(this.messageForm.controls.Faculty.value);

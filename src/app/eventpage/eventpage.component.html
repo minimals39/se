@@ -33,7 +33,64 @@
 <p><strong>Number of participant: </strong>{{ parti }}</p>
 <p><strong>Category: </strong>{{ category }}</p>
 <p><strong>Date : </strong>{{ date }}</p>
-<button mat-button (click)="cancel">Cancel Event</button>
-<button mat-button>Edit Event</button>
+<button mat-button (click)="cancel()">Cancel Event</button>
+<button mat-button (click)="edit()">Edit Event</button>
+</div>
+<div id ="editstuffs" *ngIf = "setedit">
 
+  <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+
+    <h5 *ngIf="success">Your form is valid!</h5>
+  
+    <label>
+      ActivityName:
+      <input type="text" formControlName="EventName">
+      <div *ngIf="submitted && messageForm.controls.EventName.errors" class="error">
+        <div *ngIf="messageForm.controls.EventName.errors.required">Activity Name is required</div>
+      </div>
+    </label>
+  
+    <label>
+      <br>Information:
+      <textarea formControlName="Information"></textarea>
+      <div *ngIf="submitted && messageForm.controls.Information.errors" class="error">
+        <div *ngIf="messageForm.controls.Information.errors.required">An information is required</div>
+      </div>
+    </label>
+  
+    <label>
+      <br>participant:
+      <input type="number" formControlName="participant">
+      <div *ngIf="submitted && messageForm.controls.participant.errors" class="error">
+        <div *ngIf="messageForm.controls.participant.errors.required">A number of participant is required</div>
+      </div>
+    </label>
+  
+    <label>
+      <br>Date:
+      <input type="datetime-local" formControlName="date">
+      <div *ngIf="submitted && messageForm.controls.date.errors" class="error">
+        <div *ngIf="messageForm.controls.date.errors.required">Date is required</div>
+      </div>
+    </label>
+    
+    <label>Category
+        <input type="text" placeholder="Pick one" aria-label="category" matInput [matAutocomplete]="auto" formControlName="category">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+        <div *ngIf="submitted && messageForm.controls.category.errors" class="error">
+          <div *ngIf="messageForm.controls.category.errors.required">category is required</div>
+        </div>
+      </label>
+    
+  
+  
+    <input type="submit" value="SubmitEvent" class="cta">
+  
+  </form>
+  
+  
 </div>

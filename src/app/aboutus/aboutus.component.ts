@@ -58,9 +58,9 @@ export class AboutusComponent implements OnInit {
     }
     )*/
     this.map.getLocation().subscribe(data => {
-      for(var _i = 0; _i <2; _i++){
+      for (var _i = 0; _i < 2; _i++) {
         this.map.getoneLocation(data[_i]._id).subscribe(
-          data =>{
+          data => {
             console.log(data)
             this.markers.push({
               lat: data.lat,
@@ -72,12 +72,15 @@ export class AboutusComponent implements OnInit {
               draggable: false,
               category: data.category
             })
-        })
+          })
       }
     })
   }
 
+  participate() {
+    // do something
 
+  }
 
   markerDragEnd(m: marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
