@@ -15,6 +15,9 @@ interface marker {
   date?: Date;
   category?: string;
   draggable: boolean;
+  _id:string;
+ // x:number;
+ // y:number;
 
 }
 
@@ -33,8 +36,8 @@ export class EventpageComponent implements OnInit {
 
   zoom: number = 17;
   // initial center position for the map
-  lat: number = 13.7283785;
-  lng: number = 100.77517;
+  lat: number; //13.7283785
+  lng: number ; //100.77517
   title: string = '';
   parti: number;
   info: string = '';
@@ -42,9 +45,12 @@ export class EventpageComponent implements OnInit {
   location: Object;
   date: Date;
   category: string = '';
+  _id: string = '';
+ // x:number;
+ // y:number;
+  
   constructor(private map: DataService, private formBuilder: FormBuilder,private data: DataService) {
   }
-
   ngOnInit() {
     this.map.getLocation().subscribe(data => {
       for (var _i = 0; _i < Object.keys(data).length; _i++) {
@@ -52,6 +58,7 @@ export class EventpageComponent implements OnInit {
           data => {
             if (data.EventName) {
               this.markers.push({
+                _id: data._id,
                 lat: data.Lat,
                 lng: data.Lng,
                 label: data.EventName,
@@ -59,7 +66,8 @@ export class EventpageComponent implements OnInit {
                 participant: data.participant,
                 date: data.date,
                 draggable: false,
-                category: data.category
+                category: data.category,
+
               })
             }
           }
@@ -98,6 +106,9 @@ export class EventpageComponent implements OnInit {
     this.parti = this.markers[index].participant
     this.date = this.markers[index].date
     this.category = this.markers[index].category
+    this._id = this.markers[index]._id
+    this.lat=this.markers[index].lat
+    this.lng=this.markers[index].lng
   }
   markers: marker[] = [
 
@@ -113,8 +124,13 @@ export class EventpageComponent implements OnInit {
     console.log(this.messageForm.controls.EventName.value);
     console.log(this.messageForm.controls.Information.value);
     console.log(this.messageForm.controls.participant.value);
+    //console.log(this.x+"hello")
+    //console.log(this.y)
     //edit edit down here 
-    this.data.postevent({
+    this.data.editevent({
+      _id:this._id,
+      Lat:this.lat,
+      Lng:this.lng,
       EventName: this.messageForm.controls.EventName.value,
       Information: this.messageForm.controls.Information.value,
       participant: this.messageForm.controls.participant.value,
@@ -124,6 +140,8 @@ export class EventpageComponent implements OnInit {
 }
 
   edit() {
+    //console.log(this.lat)
+    //console.log(this.lng)
      this.setedit = true;
   }
   cancel() {

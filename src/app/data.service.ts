@@ -14,6 +14,9 @@ import { takeWhile } from 'rxjs/operators';
    date: Date;
    category: string;
    createrID: string;
+   _id:string;
+   aaa:number;
+   bbb:number;
  } 
  interface locaname{
   results: string;
@@ -74,6 +77,19 @@ export class DataService {
   delevent(event){
     console.log(event)
     this.http.post('http://localhost:3000/map/deleteMap', event)
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
+
+  }
+  editevent(event){
+    console.log(event)
+    this.http.post('http://localhost:3000/map/mapUpdate', event)
       .subscribe(
         res => {
           console.log(res);
