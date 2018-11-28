@@ -1,4 +1,59 @@
 agm-map{
     width: 600px;
     height: 400px;
+}label {
+    display: block;
+    
+    input, textarea {
+        display: block;
+        width: 50%;
+        margin-bottom: 20px;
+        padding: 1em;
+    }
+
+    .error {
+        margin-top: -20px;
+        background: yellow;
+        padding: .5em;
+        display: inline-block;
+        font-size: .9em;
+        margin-bottom: 20px;
+    }
 }
+
+.cta {
+    background:  rgb(255, 163, 77);;
+    border: none;
+    color: white;
+
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 1em;
+    cursor: pointer;
+    font-family: 'Montserrat';
+}
+
+.results {
+    margin-top: 50px;
+
+    strong {
+        display: block;
+    }
+    span {
+        margin-bottom: 20px;
+        display: block;
+    }
+}
+.genre{
+    display: grid;
+    mat-checkbox{
+        :checked{
+            background-color: orange;
+        }
+
+    }
+}
+span{
+    .mat-option-text{
+    color: black;
+}}

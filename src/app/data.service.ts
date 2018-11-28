@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';  // Import it up here
  interface Location {
-  /* Lat: number;
+   Lat: number;
    Lng: number;
-   EventName: string;*/
-   lat: number;
+   EventName: string;
+   /*lat: number;
    lng: number;
-   name: string;
+   name: string;*/
    Information: string;
    participant: number;
    date: Date;

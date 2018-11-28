@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { MouseEvent as AGMMouseEvent, MarkerManager } from '@agm/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 interface marker {
   lat: number;
@@ -11,6 +14,7 @@ interface marker {
   date?: Date;
   category?: string;
   draggable: boolean;
+  visible?: boolean;
 
 }
 
@@ -22,6 +26,11 @@ interface marker {
 export class AboutusComponent implements OnInit {
   zoom: number = 17;
   // initial center position for the map
+  messageForm: FormGroup;
+  submitted = false;
+  success = false;
+  options: string[] = ['เทคโนโลยี', 'ครอบครัว', 'สุขภาพ', 'กีฬา', 'การเรียนรู้', 'การเรียนรู้', 'ถ่ายภาพ', 'อาหาร', 'ภาษาและวัฒนธรรม', 'ดนตรี'];
+  filteredOptions: Observable<string[]>;
   lat: number = 13.7283785;
   lng: number = 100.77517;
   title: string = '';
@@ -31,11 +40,11 @@ export class AboutusComponent implements OnInit {
   location: Object;
   date: Date;
   category: string = '';
-  constructor(private map: DataService) {
+  constructor(private map: DataService, private formBuilder: FormBuilder, private data: DataService) {
   }
 
   ngOnInit() {
-    /*
+
     this.map.getLocation().subscribe(data => {
       for (var _i = 1; _i <= Object.keys(data).length; _i++) {
         this.map.getoneLocation(_i).subscribe(
@@ -49,14 +58,18 @@ export class AboutusComponent implements OnInit {
                 participant: data.participant,
                 date: data.date,
                 draggable: false,
-                category: data.category
+                category: data.category,
+                visible: true,
               })
             }
           }
         )
       }
     }
-    )*/
+    )
+    console.log(this.markers.values.toString()
+    );
+    /*
     this.map.getLocation().subscribe(data => {
       for (var _i = 0; _i < 2; _i++) {
         this.map.getoneLocation(data[_i]._id).subscribe(
@@ -74,9 +87,43 @@ export class AboutusComponent implements OnInit {
             })
           })
       }
-    })
-  }
+    });*/
+    this.messageForm = this.formBuilder.group({
+      category: ''
+    });
+    this.filteredOptions = this.messageForm.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
 
+  }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+  filter() {
+    console.log(this.messageForm.controls.category.value);
+    var checker = this.messageForm.controls.category.value;
+    if (checker != "") {
+      for (var _i = 1; _i <= Object.keys(this.markers).length; _i++) {
+        this.markers[_i].visible = false;
+        if(this.markers[_i].category && this.markers[_i].category.includes(checker)){
+        console.log(this.markers[_i].category);
+        this.markers[_i].visible = true;
+        }
+
+      }
+    }else{
+      for (var _i = 1; _i <= Object.keys(this.markers).length; _i++) {
+        this.markers[_i].visible = true;
+ 
+      }
+
+
+    }
+
+  }
   participate() {
     // do something
 

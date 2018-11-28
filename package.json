@@ -28,6 +28,7 @@
     "angular-google-signin": "^0.1.5",
     "angular5-social-login": "^1.0.9",
     "core-js": "^2.5.4",
+    "moment": "^2.22.2",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
   },

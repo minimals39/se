@@ -15,7 +15,9 @@
       (markerClick)="clickedMarker(m.label, i)"
       [latitude]="m.lat"
       [longitude]="m.lng"
-      [label]="m.label">
+      [label]="m.label"
+      [visible] = "m.visible"
+      >
     <agm-info-window>
       <strong>{{ m.label }}</strong>
     </agm-info-window>
@@ -32,6 +34,15 @@
 <p><strong>Number of participant: </strong>{{ parti }}</p>
 <p><strong>Category: </strong>{{ category }}</p>
 <p><strong>Date : </strong>{{ date }}</p>
-<button mat-button (click)="participate">Participate</button>
+<form [formGroup]="messageForm">
+<label>filter
+  <input type="text" placeholder="Pick one" aria-label="category" matInput [matAutocomplete]="auto" formControlName="category">
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+<button mat-button (click)="filter()">filter</button>
 
-</div>
+<button mat-button (click)="participate()">Participate</button>
+
