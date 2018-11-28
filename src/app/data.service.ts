@@ -70,6 +70,20 @@ export class DataService {
       );
 
   }
+
+  delevent(event){
+    console.log(event)
+    this.http.post('http://localhost:3000/map/deleteMap', event)
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.log("Error occured");
+        }
+      );
+
+  }
   
   
   getsmth() {
