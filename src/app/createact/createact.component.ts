@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { FormsModule } from '@angular/forms'
 import { Observable, Subject } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+declare const google: any;
 
 interface marker {
   lat: number;
@@ -24,6 +25,8 @@ export class CreateactComponent implements OnInit {
   success = false;
   options: string[] = ['เทคโนโลยี', 'ครอบครัว', 'สุขภาพ','กีฬา','การเรียนรู้','การเรียนรู้','ถ่ายภาพ','อาหาร','ภาษาและวัฒนธรรม','ดนตรี'];
   filteredOptions: Observable<string[]>;
+  geocoder = new google.maps.Geocoder;
+  loc: string = "";
 
 
   constructor(private data: DataService,private formBuilder: FormBuilder) { }
@@ -68,7 +71,7 @@ export class CreateactComponent implements OnInit {
       });}
       this.showlat = $event.coords.lat
       this.showlng = $event.coords.lng
-      
+      this.getGeoLocation(this.showlat,this.showlng);
       console.log(this.data.getLocationx())
     }
   
@@ -79,6 +82,24 @@ export class CreateactComponent implements OnInit {
     markers: marker[] = [
 
     ]
+    getGeoLocation(lat: number, lng: number) {
+      if (navigator.geolocation) {
+          let geocoder = new google.maps.Geocoder();
+          let latlng = new google.maps.LatLng(lat, lng);
+          let request = { latLng: latlng };
+          geocoder.geocode(request, (results, status) => {
+            if (status == google.maps.GeocoderStatus.OK) {
+              let result = results[0];
+              if (result != null) {
+                this.loc = result.formatted_address;
+              } else {
+                alert("No address available!");
+              }
+            }
+          });
+      }
+      }
+      
     onSubmit() {
       this.submitted = true;
       var auth2 = gapi.auth2.getAuthInstance();

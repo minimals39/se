@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { FormsModule } from '@angular/forms'
 import { Observable, Subject } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-
+declare const google: any;
 interface marker {
   lat: number;
   lng: number;
@@ -33,7 +33,7 @@ export class EventpageComponent implements OnInit {
   setedit = false;
   options: string[] = ['เทคโนโลยี', 'ครอบครัว', 'สุขภาพ','กีฬา','การเรียนรู้','การเรียนรู้','ถ่ายภาพ','อาหาร','ภาษาและวัฒนธรรม','ดนตรี'];
   filteredOptions: Observable<string[]>;
-
+  loc: string = "";
   zoom: number = 17;
   // initial center position for the map
   lat: number; //13.7283785
@@ -109,6 +109,7 @@ export class EventpageComponent implements OnInit {
     this._id = this.markers[index]._id
     this.lat=this.markers[index].lat
     this.lng=this.markers[index].lng
+    this.getGeoLocation(this.lat,this.lng)
   }
   markers: marker[] = [
 
@@ -153,6 +154,24 @@ export class EventpageComponent implements OnInit {
       })
 
   }
+  getGeoLocation(lat: number, lng: number) {
+    if (navigator.geolocation) {
+        let geocoder = new google.maps.Geocoder();
+        let latlng = new google.maps.LatLng(lat, lng);
+        let request = { latLng: latlng };
+        geocoder.geocode(request, (results, status) => {
+          if (status == google.maps.GeocoderStatus.OK) {
+            let result = results[0];
+            if (result != null) {
+              this.loc = result.formatted_address;
+            } else {
+              alert("No address available!");
+            }
+          }
+        });
+    }
+    }
+
 
 
 }

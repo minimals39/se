@@ -4,6 +4,7 @@ import { MouseEvent as AGMMouseEvent, MarkerManager } from '@agm/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+declare const google: any;
 
 interface marker {
   lat: number;
@@ -26,6 +27,7 @@ interface marker {
 export class AboutusComponent implements OnInit {
   zoom: number = 17;
   // initial center position for the map
+  loc: string = "";
   messageForm: FormGroup;
   submitted = false;
   success = false;
@@ -143,9 +145,26 @@ export class AboutusComponent implements OnInit {
     this.parti = this.markers[index].participant
     this.date = this.markers[index].date
     this.category = this.markers[index].category
+    this.getGeoLocation(this.markers[index].lat, this.markers[index].lng)
   }
   markers: marker[] = [
 
   ]
-
+  getGeoLocation(lat: number, lng: number) {
+    if (navigator.geolocation) {
+        let geocoder = new google.maps.Geocoder();
+        let latlng = new google.maps.LatLng(lat, lng);
+        let request = { latLng: latlng };
+        geocoder.geocode(request, (results, status) => {
+          if (status == google.maps.GeocoderStatus.OK) {
+            let result = results[0];
+            if (result != null) {
+              this.loc = result.formatted_address;
+            } else {
+              alert("No address available!");
+            }
+          }
+        });
+    }
+    }
 }
