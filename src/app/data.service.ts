@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';  // Import it up here
 import { takeWhile } from 'rxjs/operators';
+var url = "http://127.0.0.1:3000"
  interface Location {
    _id:string;
    Lat: number;
@@ -30,20 +31,20 @@ import { takeWhile } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DataService {
-
+  
   constructor(private http: HttpClient) { }
   getLocation(){
-    return this.http.get<Location>('http://127.0.0.1:3000/map/get');
+    return this.http.get<Location>(url+'/map/get');
   }
 
   getoneLocation(id){
-    return this.http.get<Location>('http://127.0.0.1:3000/map/getOne/'+id);
+    return this.http.get<Location>(url+'/map/getOne/'+id);
   }
   getUsers() {
-    return this.http.get('http://127.0.0.1:3000/users/getUsers/');
+    return this.http.get(url+'/users/getUsers');
   }
   postsmth(){ //test post
-    this.http.post('http://127.0.0.1:3000/posts', {
+    this.http.post(url+'/posts', {
       title: 'foo',
       body: 'bar',
       userId: 1
@@ -59,7 +60,7 @@ export class DataService {
 
   }
   postevent(event){
-    this.http.post('http://127.0.0.1:3000/map/posts', event)
+    this.http.post(url+'/map/posts', event)
       .subscribe(
         res => {
           console.log("res");
@@ -74,7 +75,7 @@ export class DataService {
 
   delevent(event){
     console.log(event)
-    this.http.post('http://127.0.0.1:3000/map/deleteMap', event)
+    this.http.post(url+'/map/deleteMap', event)
       .subscribe(
         res => {
           console.log(res);
@@ -87,7 +88,7 @@ export class DataService {
   }
   editevent(event){
     console.log(event)
-    this.http.post('http://127.0.0.1:3000/map/mapUpdate', event)
+    this.http.post(url+'/map/mapUpdate', event)
       .subscribe(
         res => {
           console.log(res);
@@ -102,7 +103,7 @@ export class DataService {
   participate(event){
     console.log("asdfgn ",event)
 
-    return this.http.post('http://127.0.0.1:3000/users/joinNewActivity',event)
+    return this.http.post(url+'/users/joinNewActivity',event)
     .subscribe(
       res =>{
         console.log(res)
@@ -115,7 +116,7 @@ export class DataService {
   createUser(event){
     console.log("create user : ", event)
     localStorage.setItem('userID',event.userID)
-    return this.http.post('http://127.0.0.1:3000/users/login',event)
+    return this.http.post(url+'/users/login',event)
     .subscribe(
       err=>{
         console.log(err)
@@ -127,7 +128,7 @@ export class DataService {
       })
   }
   postUser(event){
-    this.http.post('http://127.0.0.1:3000/users/updateUser', event)
+    this.http.post(url+'/users/updateUser', event)
       .subscribe(
         res => {
           console.log(event)
@@ -141,7 +142,7 @@ export class DataService {
 
   }
   getsmth() {
-    return this.http.get('http://127.0.0.1:3000/map/get');
+    return this.http.get(url+'/map/get');
   }
 
 }
